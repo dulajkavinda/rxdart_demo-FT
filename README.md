@@ -73,3 +73,24 @@ readerBloc = Provider.of<ReaderBloc>(context);
 readerBloc.startReading();
 ```
 
+## Notes
+
+---
+
+All of the RxDart streams are multiple subscription, but StreamController is single subscription. So you get to listen once to the stream. So if you want to listing with multiple subscriptions  you need to add **asBroadcastStream** to the **StreamController.**
+
+```dart
+Stream<String> get dartStream => _dartStream.stream.asBroadcastStream();
+```
+
+## How it all Works?
+
+---
+
+**BehaviorSubject** remembers the previous value and get that value.
+
+**PubishSubject** does't get the current value, instead it gets the value to come down next. This is exactly like a broadcast **StreamController**
+
+**ReplaySubject** tracks all history of value that is added to the stream. We can cap the values that kept in the stream.
+
+
